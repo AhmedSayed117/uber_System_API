@@ -58,20 +58,21 @@ public class CustomerController {
         if (c!=null && d!=null){
             if (rate>0 && rate<6){
                 c.RateDriver(rate,d);
+                return c.getUsername() + " added rate = " + rate + " successfully to " + d.getUsername();
             }else return "rate must be in range \" 0<r<6 \" ";
         }else {
             if (c==null) return " Customer Not Found In The System ";
             return " Driver Not Found In The System ";
         }
-       return null;
     }
 
     @PostMapping(value = "/SelectOffer/{username}/{id}")
     public String SelectOffer(@PathVariable String username,@PathVariable int id){
-        Customer customer = CustomersList.getCustomer(username);
-        this.customer = customer;
-        if (customer!=null) customer.SelectOffer(customer.getRequest().getOfferList().get(--id));
-        return " Customer Not Found In The System ";
+        Customer c = CustomersList.getCustomer(username);
+        this.customer = c;
+        if (c!=null) c.SelectOffer(c.getRequest().getOfferList().get(--id));
+        else return " Customer Not Found In The System ";
+        return c.getUsername() + " Selected offer successfully ";
     }
 
     @GetMapping(value = "/ListOffers/{username}")

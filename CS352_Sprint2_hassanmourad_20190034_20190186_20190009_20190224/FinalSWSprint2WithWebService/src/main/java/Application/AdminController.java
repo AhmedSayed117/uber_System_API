@@ -25,7 +25,7 @@ public class AdminController {
     @PostMapping(value = "admin/{Area}")
     public ArrayList<String> setDiscount_areas(@PathVariable String Area){
         admin.setDiscount_areas(Area);
-        System.out.println(" admin choose " + Area + " to set discount for this Trip");
+        System.out.println("admin choose " + Area + " to set discount for this Trip");
         return admin.getDiscount_areas();
     }
 
